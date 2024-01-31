@@ -61,6 +61,7 @@ data class MaestroCommand(
     val travelCommand: TravelCommand? = null,
     val startRecordingCommand: StartRecordingCommand? = null,
     val stopRecordingCommand: StopRecordingCommand? = null,
+    val assertSnapshotCommand: AssertSnapshotCommand? = null,
     val addMediaCommand: AddMediaCommand? = null,
 ) {
 
@@ -98,6 +99,7 @@ data class MaestroCommand(
         travelCommand = command as? TravelCommand,
         startRecordingCommand = command as? StartRecordingCommand,
         stopRecordingCommand = command as? StopRecordingCommand,
+        assertSnapshotCommand = command as? AssertSnapshotCommand,
         addMediaCommand = command as? AddMediaCommand
     )
 
@@ -135,6 +137,7 @@ data class MaestroCommand(
         travelCommand != null -> travelCommand
         startRecordingCommand != null -> startRecordingCommand
         stopRecordingCommand != null -> stopRecordingCommand
+        assertSnapshotCommand != null -> assertSnapshotCommand
         addMediaCommand != null -> addMediaCommand
         else -> null
     }

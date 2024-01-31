@@ -28,6 +28,7 @@ import maestro.orchestra.error.InvalidFlowFile
 import maestro.orchestra.error.MediaFileNotFound
 import maestro.orchestra.error.SyntaxError
 import maestro.orchestra.util.Env.withEnv
+import maestro.orchestra.AssertSnapshotCommand
 import java.nio.file.Path
 import kotlin.io.path.absolutePathString
 import kotlin.io.path.exists
@@ -73,6 +74,7 @@ data class YamlFluentCommand(
     val travel: YamlTravelCommand? = null,
     val startRecording: YamlStartRecording? = null,
     val stopRecording: YamlStopRecording? = null,
+    val assertSnapshot: YamlAssertSnapshot? = null,
     val addMedia: YamlAddMedia? = null,
 ) {
 
@@ -211,6 +213,7 @@ data class YamlFluentCommand(
                 val tapRepeat = TapRepeat(2, delay)
                 listOf(tapCommand(doubleTapOn, tapRepeat = tapRepeat))
             }
+            assertSnapshot != null -> listOf(assertSnapshot(assertSnapshot))
             else -> throw SyntaxError("Invalid command: No mapping provided for $this")
         }
     }
@@ -395,6 +398,15 @@ data class YamlFluentCommand(
                 permissions = command.permissions,
                 launchArguments = command.arguments,
                 label = command.label,
+            )
+        )
+    }
+
+    private fun assertSnapshot(command: YamlAssertSnapshot): MaestroCommand {
+        return MaestroCommand(
+            AssertSnapshotCommand(
+                path = command.path,
+                threshold = command.threshold,
             )
         )
     }
