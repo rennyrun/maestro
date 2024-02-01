@@ -1,0 +1,139 @@
+# onFlowStart:
+#   - runFlow: subflows/loadElements.yml
+appId: "enterprise.tokopedia.Tokopedia"
+# env:
+#   PRODUCT_NAME: laptop
+# tags:
+#   - "Test Case 1 - Find Product"
+
+---
+- launchApp
+- extendedWaitUntil:
+    visible: "Cari di Tokopedia"
+    timeout: 10000
+- tapOn: "Cari di Tokopedia"
+# - takeScreenshot: SearchTokopedia
+- assertSnapshot:
+    path: "SearchTokopedia.png"
+    threshold: "98%" 
+    
+# # Login Flow
+
+# - runFlow: subflows/freshLogin.yaml
+
+# # - Home
+# - extendedWaitUntil:
+#     visible: "Cari di Tokopedia"
+#     timeout: 10000
+# - assertVisible:
+#     id: "${output.elements.searchField}"
+
+# # Search Product Flow
+
+# # - SRP
+# - tapOn:
+#     id: "${output.elements.searchField}"
+# - runFlow: subflows/closeCoachmark.yaml
+# - assertVisible:
+#     id: "${output.elements.searchBar}"
+# - inputText: ${PRODUCT_NAME}
+# - runFlow: subflows/closeCoachmark.yaml
+# - assertVisible: ${PRODUCT_NAME}
+# - assertVisible:
+#     id: "${output.elements.searchCell}"
+#     index: 0
+# - assertVisible:
+#     id: "${output.elements.searchCell}"
+#     index: 0
+#     containsDescendants: 
+#       - text: .*${PRODUCT_NAME}.*
+# - tapOn:
+#     id: "${output.elements.searchCell}"
+#     index: 0
+# # Validate on Product Tab
+# - assertNotVisible: Lihat Toko 
+# # Validate the product is what user search
+# - assertVisible:
+#     id: "${output.elements.productCell.title}"
+#     index: 0
+# - assertVisible:
+#     id: "${output.elements.productCell.price}"
+#     index: 0
+# - assertVisible:
+#     id: "${output.elements.productCell.image}"
+#     index: 0
+# - runFlow:
+#     when:
+#         visible:
+#             id: "${output.elements.productCell.soldCount}"
+#     commands:
+#         - assertVisible:
+#             id: "${output.elements.productCell.soldCount}"
+# - runFlow:
+#     when:
+#         visible:
+#             id: "${output.elements.productCell.rating}"
+#     commands:
+#         - assertVisible:
+#             id: "${output.elements.productCell.rating}"
+
+# # Open Product Flow
+
+# # - Failed ATC Flow
+
+# - tapOn:
+#     id: "${output.elements.productCell.image}"
+#     index: 0
+# - extendedWaitUntil:
+#     visible:
+#         id: "${output.elements.pdp.name}"
+#     timeout: 10000
+# - assertVisible:
+#     id: "${output.elements.pdp.name}"
+# - assertVisible:
+#     id: "${output.elements.pdp.price}"
+# - assertVisible:
+#     id: "${output.elements.pdp.wishlist}"
+# - assertVisible:
+#     id: "${output.elements.pdp.chatSeller}"
+# - assertVisible:
+#     id: "${output.elements.pdp.buyButton}"
+# - assertVisible:
+#     id: "${output.elements.pdp.atc}"
+# - tapOn:
+#     id: "${output.elements.pdp.atc}"
+# - runFlow:
+#     when:
+#         visible:
+#             id: "${output.elements.bsCloseButton}"
+#     commands:
+#         - tapOn: + Keranjang
+#         - tapOn:
+#             id: "${output.elements.bsCloseButton}"
+
+# # - Success ATC Flow
+
+# - runFlow: subflows/openQCProduct.yaml
+# - assertVisible:
+#     id: "${output.elements.pdp.name}"
+# - assertVisible:
+#     id: "${output.elements.pdp.price}"
+# - assertVisible:
+#     id: "${output.elements.pdp.wishlist}"
+# - assertVisible:
+#     id: "${output.elements.pdp.chatSeller}"
+# - assertVisible:
+#     id: "${output.elements.pdp.buyButton}"
+# - assertVisible:
+#     id: "${output.elements.pdp.atc}"
+# - tapOn:
+#     id: "${output.elements.pdp.atc}"
+# - runFlow:
+#      when:
+#         visible:
+#             id: "${output.elements.bsCloseButton}"
+#      commands:
+#        - tapOn: + Keranjang
+#        - tapOn:
+#             id: "${output.elements.bsCloseButton}"
+
